@@ -1,32 +1,64 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div id="app">
+        <add-header></add-header>
+        <div id="nav">
+            <router-link to="/">Login</router-link> |
+            <router-link to="/register">Register</router-link> |
+            <router-link to="/dashboard">Tasks to-do</router-link> |
+            <button @click="logout" class="waves-effect waves-teal btn-flat">Logout</button>
+            
+        </div>
+        <router-view />
+        <add-footer></add-footer>
     </div>
-    <router-view/>
-  </div>
 </template>
 
-<style lang="scss">
+<script>
+import firebase from 'firebase';
+import header from "./components/Header.vue";
+import footer from "./components/Footer.vue";
+
+export default {
+    methods: {
+        logout() {
+            firebase
+                .auth()
+                .signOut()
+                .then(() => {
+                    alert('Successfully logged out');
+                    this.$router.push('/');
+                })
+                .catch(error => {
+                    alert(error.message);
+                    this.$router.push('/');
+                });
+        },
+    },
+    components: {
+              'add-header': header,
+      'add-footer': footer
+    }
+};
+</script>
+<style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
 }
-
 #nav {
-  padding: 30px;
-
-  a {
+    padding: 30px;
+}
+#nav a {
     font-weight: bold;
     color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+}
+#nav a.router-link-exact-active {
+    color: #42b983;
+}
+input {
+    margin-right: 20px;
 }
 </style>
