@@ -4,7 +4,7 @@
         <div id="nav">
             <router-link to="/">Login</router-link> |
             <router-link to="/register">Register</router-link> |
-            <router-link to="/dashboard">Tasks to-do</router-link> |
+            <router-link to="/todolist">Tasks to-do</router-link> |
             <button @click="logout" class="waves-effect waves-teal btn-flat">Logout</button>
             
         </div>

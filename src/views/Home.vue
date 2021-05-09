@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-header"><h4>Login</h4></div>
                     <div class="card-body">
@@ -44,7 +44,8 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
           alert("Successfully logged in");
-          this.$router.push("/dashboard");
+          //this.$router.push("/dashboard");
+          this.$router.push("/todolist");
         })
         .catch((error) => {
           alert(error.message);
