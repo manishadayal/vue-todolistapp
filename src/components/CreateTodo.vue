@@ -1,26 +1,29 @@
 <template>
-<div class="row">
-  <form class="col-12 col-sm-10 col-md-8 cl-lg-6" method="post">
-    <div class="form-outline">
-    <input
-      v-model="newTodo"
-      type="text"
-      class="form-control"
-      placeholder="Create a new to-do..."
-    />
-    </div>
-    <button v-on:click.prevent="addTodo()">Add Task</button>
-  </form>
-</div>
+  <div class="row justify-content-center todo-wrapper">
+    <form
+      class="col-12 col-sm-8 col-md-8 cl-lg-6"
+      method="post"
+      v-on:submit.prevent="addTodo()"
+    >
+      <div class="form-outline">
+        <input
+          v-model="newTodo"
+          type="text"
+          class="form-control"
+          placeholder="Create a new to-do..."
+        />
+      </div>
+      <!--<button v-on:click.prevent="addTodo()">Add Task</button>-->
+    </form>
+  </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
-      newTodo: ""
-/*       {
+      newTodo: "",
+      /*       {
           title: "",
           completed: "",
           userid: ""
@@ -34,26 +37,30 @@ export default {
       }
       this.newTodo = "";
     },
-    post: function() {
-        this.$http.post('https://jsonplaceholder.typicode.com/todos', {
-              title: this.newTodo.title,
-              completed: this.newTodo.content,
-              userid: 1
-          }).then(function(data){
-              console.log(data);
-              this.submitted = true;
-          });
-/*           this.$http.post('https://todo-bbacb-default-rtdb.firebaseio.com/posts.json', this.newToDo).then(function(data){
+    submit: function () {
+      this.$http
+        .post("https://jsonplaceholder.typicode.com/todos", {
+          title: this.newTodo.title,
+          completed: this.newTodo.content,
+          userid: 1,
+        })
+        .then(function (data) {
+          console.log(data);
+          this.submitted = true;
+        });
+      /*           this.$http.post('https://todo-bbacb-default-rtdb.firebaseio.com/posts.json', this.newToDo).then(function(data){
               console.log(data);
               this.submitted = true;
           }); */
-      }
     },
-  
-  components: {
+  },
 
-  }
+  components: {},
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.todo-wrapper {
+  padding-bottom: 30px;
+}
+</style>

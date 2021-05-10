@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import firebase from 'firebase/app';
+import store from './store'
 
 var firebaseConfig = {
     apiKey: "AIzaSyAXoAkhPnmRxyAMGfrR-XQ-GYfIod7H1qw",
@@ -18,5 +19,6 @@ Vue.config.productionTip = false;
 
 new Vue({
     router,
-    render: h => h(App),
+    store,
+    render: h => h(App)
 }).$mount('#app');
