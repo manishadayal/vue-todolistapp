@@ -21,7 +21,7 @@
           <todo
             v-for="(todo, index) in todos"
             :key="index"
-            :description="todo.description"
+            :title="todo.title"
             :completed="todo.completed"
             @on-toggle="toggleTodo(todo)"
             @on-delete="deleteTodo(todo)"
@@ -44,16 +44,12 @@ export default {
   },
   data() {
     return {
-      todos: [
-        { description: "Do the dishes", completed: false },
-        { description: "Take out the trash", completed: false },
-        { description: "Finish doing laundry", completed: false },
-      ],
+      todos: [],
     };
   },
   methods: {
     addTodo(newTodo) {
-      this.todos.push({ description: newTodo, completed: false });
+      this.todos.push({ title: newTodo, completed: false });
     },
     toggleTodo(todo) {
       todo.completed = !todo.completed;
@@ -62,13 +58,21 @@ export default {
       this.todos = this.todos.filter((todo) => todo !== deletedTodo);
     },
     editTodo(todo, newTodoDescription) {
-      todo.description = newTodoDescription;
+      todo.title = newTodoDescription;
     },
   },
   components: {
     Todo,
     CreateTodo,
   },
+      // lifecycle hook
+    created() {
+        this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function(data){
+            console.log(data);
+            this.todos = data.body.slice(0,10);
+
+        })
+    },
 };
 </script>
 

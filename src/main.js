@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import firebase from 'firebase/app';
 import store from './store'
+import VueResource from "vue-resource"
 
 var firebaseConfig = {
     apiKey: "AIzaSyAXoAkhPnmRxyAMGfrR-XQ-GYfIod7H1qw",
@@ -16,6 +17,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 Vue.config.productionTip = false;
+Vue.use(VueResource);
 
 new Vue({
     router,

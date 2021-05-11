@@ -6,7 +6,7 @@
       @click="$emit('on-toggle')"
       v-if="!isEditing"
     >
-      <span>{{ description }}</span>
+      <span>{{ title }}</span>
     </button>
     <form v-else class="flex-grow-1" @submit.prevent="finishEditing()">
       <input
@@ -38,7 +38,7 @@ export default {
     };
   },
   props: {
-    description: String,
+    title: String,
     completed: Boolean,
   },
   methods: {
@@ -46,7 +46,7 @@ export default {
       if (this.isEditing) {
         this.finishEditing();
       } else {
-        this.newTodoDescription = this.description;
+        this.newTodoDescription = this.title;
         this.isEditing = true;
         this.$nextTick(() => this.$refs.newTodo.focus());
       }
