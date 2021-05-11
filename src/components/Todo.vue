@@ -12,7 +12,7 @@
       <input
         type="text"
         class="form-control"
-        v-model="newTodoDescription"
+        v-model="newTodoTitle"
         @blur="finishEditing()"
         ref="newTodo"
       />
@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       isEditing: false,
-      newTodoDescription: "",
+      newTodoTitle: "",
     };
   },
   props: {
@@ -46,14 +46,14 @@ export default {
       if (this.isEditing) {
         this.finishEditing();
       } else {
-        this.newTodoDescription = this.title;
+        this.newTodoTitle = this.title;
         this.isEditing = true;
         this.$nextTick(() => this.$refs.newTodo.focus());
       }
     },
     finishEditing() {
       this.isEditing = false;
-      this.$emit("on-edit", this.newTodoDescription);
+      this.$emit("on-edit", this.newTodoTitle);
     },
   },
 };

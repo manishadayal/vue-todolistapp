@@ -3,7 +3,10 @@
     <div class="row justify-content-center">
       <div>
         <h2>Create a new to-do</h2>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+        <p>
+          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+          dolore eu fugiat nulla pariatur.
+        </p>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -12,8 +15,11 @@
       </div>
     </div>
     <div>
-        <h2>List of tasks</h2>
-        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <h2>List of tasks</h2>
+      <p>
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+        ut aliquip ex ea commodo consequat.
+      </p>
     </div>
     <div class="row justify-content-center">
       <div class="col-12 col-sm-10 col-lg-6">
@@ -57,22 +63,28 @@ export default {
     deleteTodo(deletedTodo) {
       this.todos = this.todos.filter((todo) => todo !== deletedTodo);
     },
-    editTodo(todo, newTodoDescription) {
-      todo.title = newTodoDescription;
+    editTodo(todo, newTodoTitle) {
+      todo.title = newTodoTitle;
     },
   },
   components: {
     Todo,
     CreateTodo,
   },
-      // lifecycle hook
-    created() {
-        this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function(data){
+  // lifecycle hook
+  created() {
+    /*         this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function(data){
             console.log(data);
             this.todos = data.body.slice(0,10);
 
-        })
-    },
+        }) */
+    this.$http
+      .get("https://authenticate-2b945-default-rtdb.firebaseio.com/todos.json")
+      .then(function (data) {
+        //console.log(data);
+        this.todos = data.body;
+      });
+  },
 };
 </script>
 

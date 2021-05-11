@@ -2,7 +2,7 @@
   <div class="row justify-content-center todo-wrapper">
     <form
       class="col-12 col-sm-8 col-md-8 cl-lg-6"
-      
+      v-if="!submitted"
     >
       <div class="form-outline">
         <input
@@ -14,6 +14,9 @@
       </div>
       <button v-on:click.prevent="submit">Add Task</button>
     </form>
+    <div v-if="submitted">
+        <h4>Saved to databse successfully.</h4>
+    </div>
   </div>
 </template>
 
@@ -23,9 +26,9 @@ export default {
     return {
       newTodo: {
           title: "",
-          completed: "",
-          userid: ""
+          completed: false
       },
+      submitted: false,
     };
   },
   methods: {
@@ -36,15 +39,17 @@ export default {
       this.newTodo = "";
     },
     submit: function () {
-      this.$http
+      /* this.$http
         .post("https://jsonplaceholder.typicode.com/todos", this.newTodo).then(function (data) {
           console.log(data);
           this.submitted = true;
+        }); */
+        this.$http
+        .post("https://authenticate-2b945-default-rtdb.firebaseio.com/todos.json", this.newTodo).then(function (data) {
+          console.log(data);
+          this.submitted = true;
         });
-      /*           this.$http.post('https://todo-bbacb-default-rtdb.firebaseio.com/posts.json', this.newToDo).then(function(data){
-              console.log(data);
-              this.submitted = true;
-          }); */
+      
     },
   },
 
